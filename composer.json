@@ -1,0 +1,9 @@
+{
+    "require": {
+        "curl/curl": "^1.6",
+        "gridonic/hapi": "^0.1.0",
+        "m1/env": "^2.1",
+        "symfony/css-selector": "2.*",
+        "artack/dom-query": "^0.1.0"
+    }
+}

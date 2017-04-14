@@ -1,0 +1,14 @@
+{
+  "extends": "airbnb",
+  "parser": "babel-eslint",
+  "env": {
+    "browser": true,
+    "node": true
+  },
+  "rules": {
+    "indent": ["error", 4, {"SwitchCase": 1}],
+    "jsx-quotes": ["error", "prefer-single"],
+    "import/extensions": 0,
+    "no-prototype-builtins": 0
+  }
+}
