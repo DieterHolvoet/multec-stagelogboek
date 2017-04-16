@@ -1,0 +1,30 @@
+<?php
+/**
+ * Created by PhpStorm.
+ * User: Dieter
+ * Date: 14/04/2017
+ * Time: 20:25
+ */
+
+namespace StageLogboek;
+
+class Competence
+{
+    const INQUISITIVENESS_AND_INTEREST = 1;
+    const ANALYSIS_AND_SYNTHESIS = 3;
+    const APPLICATION_OF_KNOWLEDGE_AND_THEORETICAL_PERCEPTION = 4;
+    const INITIATIVE = 5;
+    const EFFORT_AND_PERSEVERANCE = 6;
+    const DISCIPLINE_AND_ACCURACY = 7;
+    const PERSONAL_CARE = 8;
+    const FLEXIBILITY = 9;
+    const CREATIVITY_AND_INNOVATION = 10;
+    const CARE_FOR_PEOPLE_MATERIAL_AND_ENVIRONMENT = 11;
+    const PERSONAL_PLANNING_AND_ORGANIZATION = 12;
+    const QUALITY_ASSURANCE_AND_PRACTICALITY = 13;
+    const WORKING_METHOD = 14;
+    const SOCIAL_DEMEANOUR = 15;
+    const PERSUASIVENESS_ASSERTIVENESS = 16;
+    const COMMUNICATION = 17;
+    const TEAMWORK_COMPANY_INTEGRATION = 18;
+}

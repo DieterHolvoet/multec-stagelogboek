@@ -5,26 +5,31 @@ namespace TimeTrackers;
 use DateTime;
 use Harvest\HarvestAPI;
 use Harvest\Model\DayEntry;
+use StageLogboek\Competence;
 use StageLogboek\Entry;
+use StageLogboek\Parser;
 
-class Harvest
+class Harvest implements TimeTrackerInterface
 {
     private $api;
     private $user;
     private $password;
     private $account;
+    private $template;
 
     /**
      * Harvest constructor.
      * @param $user
      * @param $password
      * @param $account
+     * @param $template
      */
-    public function __construct($user, $password, $account)
+    public function __construct($user, $password, $account, $template)
     {
         $this->user = $user;
         $this->password = $password;
         $this->account = $account;
+        $this->template = $template;
 
         $this->api = new HarvestApi();
         $this->api->setUser($user);
@@ -52,17 +57,30 @@ class Harvest
     }
 
     /**
-     * Transform an Harvest API entry to a Stagelogboek entry
+     * Transform a Harvest entry to a Stagelogboek entry
      * @param DayEntry $entry
-     * @return Entry
+     * @return bool|Entry
      */
-    private function transformEntry(DayEntry $entry)
+    public function transformEntry($entry)
     {
+        if (!$entry instanceof DayEntry) {
+            return false;
+        }
+
         return new Entry(
             new DateTime("{$entry->get('spent-at')} {$entry->get('started-at')}"),
             new DateTime("{$entry->get('spent-at')} {$entry->get('ended-at')}"),
-            "{$entry->get('project')} ({$entry->get('task')})" . (!empty($entry->get('notes')) ? ": {$entry->get('notes')}" : ''),
-            [4, 6, 10, 13]
+            Parser::parseTemplate($this->template, [
+                'project' => $entry->get('project'),
+                'task' => $entry->get('task'),
+                'description' => $entry->get('notes'),
+            ]),
+            [
+                Competence::APPLICATION_OF_KNOWLEDGE_AND_THEORETICAL_PERCEPTION,
+                Competence::EFFORT_AND_PERSEVERANCE,
+                Competence::CREATIVITY_AND_INNOVATION,
+                Competence::QUALITY_ASSURANCE_AND_PRACTICALITY
+            ]
         );
     }
 }

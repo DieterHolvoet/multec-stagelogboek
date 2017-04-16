@@ -158,4 +158,29 @@ class Parser
         preg_match_all('|Set-Cookie: (.*)=(.*);|U', implode($responseHeaders), $matches);
         return [$matches[1][0] => $matches[2][0]];
     }
+
+    /**
+     * @param $string       The template string
+     * @param $variables    The values to replace the placeholders
+     * @return mixed        The finished string
+     */
+    public static function parseTemplate($string, $variables)
+    {
+        while (preg_match('/{(\[(.*?)\])?(.*?)(\[(.*?)\])?}/', $string, $matches, PREG_OFFSET_CAPTURE)) {
+            $startIndex = $matches[0][1];
+            $offset = strlen($matches[0][0]);
+
+            $prefix = $matches[2][0];
+            $key = $matches[3][0];
+            $value = $variables[$key] ?: '';
+
+            if (!empty($value) && !empty($prefix)) {
+                $value = $prefix.$value;
+            }
+
+            $string = substr_replace($string, $value, $startIndex, $offset);
+        }
+
+        return $string;
+    }
 }

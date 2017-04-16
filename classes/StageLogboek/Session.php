@@ -150,7 +150,7 @@ class Session
             'StartMin' => $entry->getStart()->format('i'),
             'EndHr' => $entry->getEnd()->format('H'),
             'EndMin' => $entry->getEnd()->format('i'),
-            'ishipQuestions' => $entry->getQuestions(),
+            'ishipQuestions' => $entry->getCompetences(),
         ];
         $data = http_build_query($params);
         $data = preg_replace('/%5B(?:[0-9]|[1-9][0-9]+)%5D=/', '=', $data);

@@ -13,22 +13,22 @@ class Entry implements JsonSerializable
     private $end;
     /** @var string */
     private $description;
-    /** @var array */
-    private $questions;
+    /** @var int[] */
+    private $competences;
 
     /**
-     * StageLogboekEntry constructor.
+     * Entry constructor.
      * @param DateTime $start
      * @param DateTime $end
      * @param string $description
-     * @param array $questions
+     * @param \int[] $competences
      */
-    public function __construct(DateTime $start, DateTime $end, $description, array $questions)
+    public function __construct(DateTime $start, DateTime $end, $description, array $competences)
     {
         $this->start = $start;
         $this->end = $end;
         $this->description = $description;
-        $this->questions = $questions;
+        $this->competences = $competences;
     }
 
     /**
@@ -56,11 +56,11 @@ class Entry implements JsonSerializable
     }
 
     /**
-     * @return array
+     * @return int[]
      */
-    public function getQuestions()
+    public function getCompetences()
     {
-        return $this->questions;
+        return $this->competences;
     }
 
     /**
