@@ -27,7 +27,7 @@ const onSubmit = (picker, name) => {
         if (json.error) {
             btn.innerText = `Toevoegen mislukt: Error ${json.error}`;
             btn.classList.add('is-warning');
-            return false;
+            return;
         }
 
         btn.innerText = `${json.addedCount} items toegevoegd.`;
